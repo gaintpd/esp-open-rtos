@@ -19,7 +19,7 @@
 typedef void (*handle_http_token)(char *);
 
 struct http_token_table {
-    char *            token;
+    const char *      token;
     handle_http_token http_tock_cb;
 };
 
@@ -110,7 +110,8 @@ static inline void parse_http_header(char *header)
 HTTP_Client_State HttpClient_dowload(Http_client_info *info)
 {
     struct addrinfo *res;
-    unsigned int tot_http_pdu_rd, read_byte, full;
+    unsigned int tot_http_pdu_rd, full;
+    ssize_t read_byte;
     int err, sock;
     char *wrt_ptr;
 
